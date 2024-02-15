@@ -14,9 +14,23 @@ public class Assets:ILists
 
     public void Show()
     {
+
         foreach (Asset asset in AssetsList) 
         {
+            if(Functions.expirationDateWarning(asset.PurchaseDate,33)) 
+            {
+                ForegroundColor= ConsoleColor.Red;
+            }
+            else if (Functions.expirationDateWarning(asset.PurchaseDate,30))
+            {
+                ForegroundColor= ConsoleColor.Yellow;
+            }
+            else 
+            {
+                ResetColor();
+            }
             asset.Print();
+            ResetColor();
         }
 
     }
@@ -54,7 +68,9 @@ public class Assets:ILists
         List<string> assetsToSave = new List<string>();
         foreach (Asset asset in AssetsList)
         {
-            assetsToSave.Add(asset.AssetToString());
+          
+                assetsToSave.Add(asset.AssetToString());
+
         }
         FileHandling fileHandling = new FileHandling(NameOfFile);
         fileHandling.SaveToFile(assetsToSave);

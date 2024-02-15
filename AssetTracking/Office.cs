@@ -1,5 +1,7 @@
 ﻿
 
+using System.Xml.Linq;
+
 namespace AssetTracking;
 
 public class Office
@@ -7,35 +9,58 @@ public class Office
     public Office()
     {
     }
-    public Office(string name, string country)
+    public Office(string name,string currancy)
     {
         Name = name;
-        Country = country;
+        Currancy = currancy;
     }
-    public Office(int id,string name, string country)
+    public Office(int id,string name, string currancy)
     {
         Id = id;
         Name = name;
-        Country = country;
+        Currancy = currancy;
     }
 
 
     public string Name { get; set; }
-    public string Country { get; set; }
+  
     public int Id {  get; set; }
+    public string Currancy {  get; set; }
 
     public string OfficeToString()
     {
-        return $"{Id.ToString()},{Name},{Country}";
+        if (Id > 0) 
+        {
+            return $"{Id.ToString()},{Name},{Currancy}";
+
+        }
+        else 
+        {
+        return string.Empty ;
+        }
     }
     public void Print()
     {
-        Console.WriteLine($"{Id}\t{Name}\t{Country}");
+        if (Id > 0) 
+        {
+            Console.WriteLine($"{Id.ToString().PadRight(10)}{Name.PadRight(10)}{Currancy}");
+
+        }
     }
     public Office OfficeFromString(string officeString)
     {
+        Office savedOffice=new  Office();
         string[] officeParts= officeString.Split(',');
-        Office savedOffice=new Office(Convert.ToInt32(officeParts[0]), officeParts[1], officeParts[2]);
+        try
+        {
+            savedOffice = new Office(Convert.ToInt32(officeParts[0]), officeParts[1], officeParts[2]);
+
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Console.WriteLine("Couldnt read from file");
+            
+        }
         return savedOffice;
 
     }

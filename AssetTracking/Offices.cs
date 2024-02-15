@@ -47,7 +47,10 @@ public class Offices : ILists
         List<string> officeToSave = new List<string>();
         foreach (Office office in OfficeList)
         {
-            officeToSave.Add(office.OfficeToString());
+            if (office.Id>0) 
+            {
+                officeToSave.Add(office.OfficeToString()); 
+            }
         }
         FileHandling fileHandling = new FileHandling(NameOfFile);
         fileHandling.SaveToFile(officeToSave);

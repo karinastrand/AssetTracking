@@ -30,13 +30,13 @@ public abstract class Asset
     public void Print()
     { 
        
-        Console.WriteLine($"{TypeOfAsset}\t{ModelName }\t{Price}\t{DateOnly.FromDateTime(PurchaseDate)}\t{OfficeId}");
+        Console.WriteLine($"{TypeOfAsset.PadRight(20)}{ModelName.PadRight(20)}{Price.ToString().PadRight(20)}{DateOnly.FromDateTime(PurchaseDate).ToString().PadRight(20)}{OfficeId}");
     }
     public abstract Asset AssetFromString(string stringAsset);
     
     public string AssetToString()
     {
-        return $"{TypeOfAsset},{ModelName},{Price.ToString()},{PurchaseDate.ToString()},{OfficeId.ToString()}";
+        return $"{TypeOfAsset},{Brand},{ModelName},{Price.ToString()},{PurchaseDate.ToString()},{OfficeId.ToString()}";
     }
 
    

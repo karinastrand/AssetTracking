@@ -12,8 +12,8 @@ public class Menu
         Console.WriteLine("---------------------");
         Console.WriteLine("1. Show the offices");
         Console.WriteLine("2. Add new offices");
-        Console.WriteLine("3. Show asserts");
-        Console.WriteLine("4. Add new asserts");
+        Console.WriteLine("3. Show assets");
+        Console.WriteLine("4. Add new assets");
         Console.WriteLine("5. Save and quit");
     }
 }

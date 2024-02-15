@@ -1,6 +1,8 @@
 ﻿
 
 
+using System.Runtime.CompilerServices;
+
 namespace AssetTracking;
 
 public class Computer : Asset
@@ -17,7 +19,18 @@ public class Computer : Asset
     {
         string[] assetParts = stringAsset.Split(',');
 
-        Computer savedAsset = new Computer(assetParts[0], assetParts[1],assetParts[2], Convert.ToDouble(assetParts[3]), Convert.ToDateTime(assetParts[4]), Convert.ToInt32(assetParts[5]));
+        Computer savedAsset = new Computer();
+        try
+        {
+            savedAsset = new Computer(assetParts[0], assetParts[1], assetParts[2], Convert.ToDouble(assetParts[3]), Convert.ToDateTime(assetParts[4]), Convert.ToInt32(assetParts[5]));
+
+        }
+        catch (IndexOutOfRangeException)
+        {
+
+            Console.WriteLine("Couldnt read asset from the file");
+        }
+        
         return savedAsset;
     }
 }

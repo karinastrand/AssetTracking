@@ -76,16 +76,26 @@ public class UI
             {
                 break;
             }
-            Write("Country: ");
-            string country = ReadLine();
+ 
             int id = 1;
             if(OfficesHandling.OfficeList.Count>0 )
             {
                  id=OfficesHandling.OfficeList.Max(offices => offices.Id) + 1;
 
             }
+            Write("Currency (choose between USD,EUR,SEK and JPY) : ");
+            string currency = ReadLine();
+            currency.ToUpper().Trim();
+            if(currency!="USD" && currency != "SEK" && currency != "EUR" && currency != "JPY")
+            {
+
+                ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You have to choose USD, SEK, EUR or JPY");
+                ResetColor();
+                continue;
+            }
                 
-            OfficesHandling.OfficeList.Add(new Office(id, name, country));
+            OfficesHandling.OfficeList.Add(new Office(id, name,currency));
         }
 
 
@@ -104,7 +114,7 @@ public class UI
             if((typeOfAsset.ToLower().Trim()!="phone") && (typeOfAsset.ToLower().Trim() != "stationarycomputer") && (typeOfAsset.ToLower().Trim() != "laptop"))
             {
                 Console.WriteLine("Type has to be Phone, Stationary or Laptop");
-                break;
+                continue;
             }
             typeOfAsset = char.ToUpper(typeOfAsset[0]) + typeOfAsset.Substring(1);
             Write("Brand: ");
@@ -123,19 +133,19 @@ public class UI
             {
 
                 Console.WriteLine("The price has to be a number");
-                break;
+                continue;
             }
             Write("PurchaseDate (yyyy-mm-dd): ");
             DateTime date = DateTime.Now;
             string stringDate = ReadLine();
             try
             {
-                Convert.ToDateTime(stringDate);
+                date=Convert.ToDateTime(stringDate);
             }
             catch (FormatException)
             {
                 Console.WriteLine("The date should be written 'yyyy-mm-dd' for example 2024-02-14");
-                break;
+                continue;
             }
             
             OfficesHandling.Show();
@@ -150,14 +160,14 @@ public class UI
                 if (!isInList)
                 {
                     Console.WriteLine("There is no office with that id");
-                    break;
+                    continue;
                 }
             }
             catch (FormatException)
             {
 
                 Console.WriteLine("The officeid has to be an integer and it has to be in the list");
-                break;
+                continue;
             }
             if (typeOfAsset=="Phone")
             {
