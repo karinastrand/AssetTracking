@@ -9,14 +9,10 @@ public class Office
     public Office()
     {
     }
-    public Office(string name,string currancy)
+    
+    public Office(string name, string currancy)
     {
-        Name = name;
-        Currancy = currancy;
-    }
-    public Office(int id,string name, string currancy)
-    {
-        Id = id;
+      
         Name = name;
         Currancy = currancy;
     }
@@ -24,14 +20,14 @@ public class Office
 
     public string Name { get; set; }
   
-    public int Id {  get; set; }
+   
     public string Currancy {  get; set; }
 
     public string OfficeToString()
     {
-        if (Id > 0) 
+        if (Name.Length > 0) 
         {
-            return $"{Id.ToString()},{Name},{Currancy}";
+            return $"{Name},{Currancy}";
 
         }
         else 
@@ -41,9 +37,9 @@ public class Office
     }
     public void Print()
     {
-        if (Id > 0) 
+        if (Name.Length > 0) 
         {
-            Console.WriteLine($"{Id.ToString().PadRight(10)}{Name.PadRight(10)}{Currancy}");
+            Console.WriteLine($"{Name.PadRight(15)}{Currancy}");
 
         }
     }
@@ -53,7 +49,7 @@ public class Office
         string[] officeParts= officeString.Split(',');
         try
         {
-            savedOffice = new Office(Convert.ToInt32(officeParts[0]), officeParts[1], officeParts[2]);
+            savedOffice = new Office(officeParts[0], officeParts[1]);
 
         }
         catch (IndexOutOfRangeException)

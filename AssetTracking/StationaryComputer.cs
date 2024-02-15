@@ -8,7 +8,7 @@ public class StationaryComputer : Computer
     {
     }
 
-    public StationaryComputer(string typeOfAsset,string brand, string modelName, double price, DateTime purchaseDate, int officeId) : base(typeOfAsset,brand, modelName, price, purchaseDate, officeId)
+    public StationaryComputer(string typeOfAsset,string brand, string modelName, double price, DateTime purchaseDate, Office office) : base(typeOfAsset,brand, modelName, price, purchaseDate, office)
     {
     }
     public override Asset AssetFromString(string stringAsset)
@@ -17,7 +17,7 @@ public class StationaryComputer : Computer
         StationaryComputer savedAsset = new StationaryComputer();
         try
         {
-            savedAsset = new StationaryComputer(assetParts[0], assetParts[1], assetParts[2], Convert.ToDouble(assetParts[3]), Convert.ToDateTime(assetParts[4]), Convert.ToInt32(assetParts[5]));
+            savedAsset = new StationaryComputer(assetParts[0], assetParts[1], assetParts[2], Convert.ToDouble(assetParts[3]), Convert.ToDateTime(assetParts[4]), new Office(assetParts[5], assetParts[6]));
 
         }
         catch (IndexOutOfRangeException)

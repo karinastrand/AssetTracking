@@ -14,8 +14,10 @@ public class Assets:ILists
 
     public void Show()
     {
-
-        foreach (Asset asset in AssetsList) 
+        List<Asset> sortedAssets = AssetsList.OrderBy(asset=>asset.HomeOffice.Name).ThenBy(asset=>asset.PurchaseDate).ToList();
+        WriteLine("Type".PadRight(15)+"Brand".PadRight(15) + "Model".PadRight(15)  + "Office".PadRight(15)+
+            "Purchase Date".PadRight(15)+"Price in USD".PadRight(15)+"Currency".PadRight(15)+"Local Price");
+        foreach (Asset asset in sortedAssets) 
         {
             if(Functions.expirationDateWarning(asset.PurchaseDate,33)) 
             {

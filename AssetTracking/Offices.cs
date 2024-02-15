@@ -19,6 +19,8 @@ public class Offices : ILists
 
     public void Show()
     {
+        WriteLine("Name".PadRight(15)+"Currency");
+
         foreach (Office office in OfficeList) 
         {
              office.Print();
@@ -47,7 +49,7 @@ public class Offices : ILists
         List<string> officeToSave = new List<string>();
         foreach (Office office in OfficeList)
         {
-            if (office.Id>0) 
+            if (office.Name.Length>0) 
             {
                 officeToSave.Add(office.OfficeToString()); 
             }
