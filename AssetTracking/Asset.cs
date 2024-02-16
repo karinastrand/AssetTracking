@@ -1,12 +1,8 @@
-﻿
-using System.Diagnostics;
-using System.Security;
-using System.Security.Cryptography.X509Certificates;
-
-namespace AssetTracking;
+﻿namespace AssetTracking;
 
 public abstract class Asset
 {
+    //Baseclass for the different assets
     public Asset()
     {
     }
@@ -19,9 +15,6 @@ public abstract class Asset
         PurchaseDate = purchaseDate;
         HomeOffice = new Office(office.Name,office.Currancy);
     }
-
-    
-
     public string TypeOfAsset { get; set; }
     public string Brand { get; set; }
     public string ModelName { get; set; }
@@ -31,53 +24,32 @@ public abstract class Asset
 
     public void Print()
     {
+        //Prints the asset on the console
         try
         {
             Console.WriteLine($"{TypeOfAsset.PadRight(15)}{Brand.PadRight(15)}{ModelName.PadRight(15)}" +
                 $"{HomeOffice.Name.PadRight(15)}{DateOnly.FromDateTime(PurchaseDate).ToString().PadRight(15)}" +
-                $"{Price.ToString().PadRight(15)}{HomeOffice.Currancy.PadRight(15)}{PriceToLocalPrice().ToString("#.##")}");
+                $"{Price.ToString().PadRight(15)}{HomeOffice.Currancy.PadRight(15)}{Functions.PriceToLocalPrice(HomeOffice.Currancy,Price).ToString("#.##")}");
 
         }
-        catch (Exception)
+        catch (Exception e)
         {
-
-            
+            Console.WriteLine(e);
         }
     }
-    public abstract Asset AssetFromString(string stringAsset);
+    public abstract Asset AssetFromString(string stringAsset); //Have to be implemented in the subclasses, needs to create an Assetobject
     
     public string AssetToString()
     {
+        //Converts asset to a string
         try
         {
             return $"{TypeOfAsset},{Brand},{ModelName},{Price.ToString()},{PurchaseDate.ToString()},{HomeOffice.Name},{HomeOffice.Currancy}";
-
         }
-        catch (Exception)
+        catch (Exception e)
         {
-
+            Console.WriteLine(e);
             return string.Empty ;
-        }
-        
-    }
-    public double PriceToLocalPrice()
-    {
-        double localPrice = 0;
-        string currency = HomeOffice.Currancy;
-        ExchangeRates exchangeRates = new ExchangeRates();
-        exchangeRates.GetFromFile();
-        double rate=exchangeRates.ExchangeRatesList.Where(rates=>rates.Currency == currency).First().Rate;
-        try
-        {
-            localPrice = Price / rate;
-
-        }
-        catch (FormatException)
-        {
-
-            WriteLine("ExchangeRate was 0");
-        }
-        return localPrice;
-    }
-   
+        }        
+    }    
 }

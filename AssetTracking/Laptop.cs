@@ -1,30 +1,20 @@
-﻿
-
-namespace AssetTracking;
-
+﻿namespace AssetTracking;
 public class Laptop : Computer
-{
+{//Right now nothing more than a copy of the baseclass but prepared for extension 
+    public int Size { get; set; }
+
     public Laptop()
     {
     }
-
     public Laptop(string typeOfAsset,string brand, string modelName, double price, DateTime purchaseDate, Office office) : base(typeOfAsset,brand, modelName, price, purchaseDate, office)
     {
     }
-    public override Asset AssetFromString(string stringAsset)
+    public Laptop(int size, string typeOfAsset, string brand, string modelName, double price, DateTime purchaseDate, Office office) : base(typeOfAsset, brand, modelName, price, purchaseDate, office)
     {
-        string[] assetParts = stringAsset.Split(',');
-        Laptop savedAsset=new Laptop();
-        try
-        {
-            savedAsset = new Laptop(assetParts[0], assetParts[1], assetParts[2], Convert.ToDouble(assetParts[3]), Convert.ToDateTime(assetParts[4]), new Office(assetParts[5], assetParts[6]));
-
-        }
-        catch (IndexOutOfRangeException)
-        {
-
-            Console.WriteLine("Couldnt read asset from the file");
-        }
-        return savedAsset;
+        Size= size;
+    }
+    public void PrintLaptop()
+    {
+        WriteLine($"Laptop: {Brand} with {Size} inch screen");
     }
 }

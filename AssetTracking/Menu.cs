@@ -1,9 +1,7 @@
-﻿
-
-namespace AssetTracking;
-
+﻿namespace AssetTracking;
 public class Menu
 {
+    //Starting menu
     public static void ShowMenu()
     {
         WriteLine("----------------------");
@@ -14,8 +12,8 @@ public class Menu
         WriteLine("2. Add new offices");
         WriteLine("3. Show assets");
         WriteLine("4. Add new assets");
-        WriteLine("5. Show exchangerates");
-        WriteLine("6. Add exchangerates");
+        WriteLine("5. Show exchange rates");
+        WriteLine("6. Add new exchange rates");
         WriteLine("7. Save and quit");
     }
 }
